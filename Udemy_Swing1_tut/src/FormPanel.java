@@ -92,11 +92,12 @@ public class FormPanel extends JPanel {
 
 		// ///////////// First Row ///////////////////////////////////
 
+		gc.gridy = 0;
+
 		gc.weightx = 1;
 		gc.weighty = 0.1;
 
 		gc.gridx = 0;
-		gc.gridy = 0;
 
 		gc.fill = GridBagConstraints.NONE;
 		gc.anchor = GridBagConstraints.LINE_END; // defines where added sticks
@@ -110,11 +111,12 @@ public class FormPanel extends JPanel {
 		add(nameField, gc);
 
 		// ///////////// Second Row ///////////////////////////////////
+		
+		gc.gridy++;
 
 		gc.weightx = 1;
 		gc.weighty = 0.1;
 
-		gc.gridy = 1;
 		gc.gridx = 0;
 		gc.anchor = GridBagConstraints.LINE_END; // defines where added sticks
 		gc.insets = new Insets(0, 0, 0, 5);
@@ -128,10 +130,11 @@ public class FormPanel extends JPanel {
 
 		// ///////////// Third Row ///////////////////////////////////
 
+		gc.gridy++;
+
 		gc.weightx = 1;
 		gc.weighty = 0.2;
 
-		gc.gridy = 2;
 		gc.gridx = 1;
 		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
 		gc.insets = new Insets(0, 0, 0, 0);
@@ -139,10 +142,11 @@ public class FormPanel extends JPanel {
 
 		// ///////////// Fourth Row ///////////////////////////////////
 
+		gc.gridy++;
+
 		gc.weightx = 1;
 		gc.weighty = 2.0;
 
-		gc.gridy = 3;
 		gc.gridx = 1;
 		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
 		gc.insets = new Insets(0, 0, 0, 0);
