@@ -21,22 +21,25 @@ import javax.swing.border.Border;
 
 public class FormPanel extends JPanel {
 
+	/* ************ Declarations ********************************************* */
 	private JLabel nameLabel;
 	private JLabel occupationLabel;
+	private JLabel taxLabel;
 	private JTextField nameField;
 	private JTextField occupationField;
+	private JTextField taxField;
 	private JButton okBtn;
-	private FormListener formListener;
 	private JList ageList;
 	private JComboBox empCombo;
 	private JCheckBox citizenCheck;
-	private JTextField taxField;
-	private JLabel taxLabel;
 
 	private JRadioButton maleRadio;
 	private JRadioButton femaleRadio;
 	private ButtonGroup genderGroup;
 
+	private FormListener formListener;
+
+	/* ************ Constructor *********************************************** */
 	public FormPanel() {
 		Dimension dim = getPreferredSize();
 		dim.width = 250;
@@ -47,23 +50,21 @@ public class FormPanel extends JPanel {
 		nameField = new JTextField(10);
 		occupationField = new JTextField(10);
 		ageList = new JList();
-		empCombo = new JComboBox();
+		empCombo = new JComboBox(); // like JList but potential editable
 		citizenCheck = new JCheckBox();
-		taxField = new JTextField(10);
+		taxField = new JTextField(10); // 10 sets textfield size
 		taxLabel = new JLabel("Tax ID");
 
-		maleRadio = new JRadioButton("male");
-		femaleRadio = new JRadioButton("female");
-		
-		maleRadio.setActionCommand("male");
-		femaleRadio.setActionCommand("female");
-
-		
-		genderGroup = new ButtonGroup();
-
-		maleRadio.setSelected(true);
-		
 		// set up gender radios
+		maleRadio = new JRadioButton("Male"); // init + labels
+		femaleRadio = new JRadioButton("Female");
+
+		maleRadio.setActionCommand("male"); // internal value, i.e.
+		femaleRadio.setActionCommand("female"); // for introspection
+
+		maleRadio.setSelected(true); // sets default radio button
+
+		genderGroup = new ButtonGroup(); // groups radio buttons
 		genderGroup.add(maleRadio);
 		genderGroup.add(femaleRadio);
 
@@ -103,18 +104,23 @@ public class FormPanel extends JPanel {
 
 		okBtn = new JButton("OK");
 
+		// submit button action listener
 		okBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*
+				 * detects submit button press and loads all wanted information
+				 * into an event ev of class FormEvent, which is then passed to
+				 * the FormListener, from there the information can be accessed
+				 * by the MainFrame, using FormEvent methods.
+				 */
 				String name = nameField.getText();
 				String occupation = occupationField.getText();
 				AgeCategory ageCat = (AgeCategory) ageList.getSelectedValue(); // JList
 				String empCat = (String) empCombo.getSelectedItem();
 				String taxId = taxField.getText();
 				boolean usCitizen = citizenCheck.isSelected();
-				
-				String gender = genderGroup.getSelection().getActionCommand();
 
-				System.out.println(empCat); // debug
+				String gender = genderGroup.getSelection().getActionCommand();
 
 				FormEvent ev = new FormEvent(this, name, occupation, ageCat
 						.getId(), empCat, taxId, usCitizen, gender);
@@ -129,13 +135,14 @@ public class FormPanel extends JPanel {
 		Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
-		layoutComponents();
+		layoutComponents(); // layout operations separated for clarity
 
 	}
 
+	/* ************ Layout Function ******************************************* */
+
 	public void layoutComponents() {
 		setLayout(new GridBagLayout());
-
 		/* setting constraints at start can be essential */
 		GridBagConstraints gc = new GridBagConstraints();
 
@@ -260,7 +267,7 @@ public class FormPanel extends JPanel {
 
 		gc.gridx = 0;
 		gc.anchor = GridBagConstraints.LINE_END; // defines where added
-														// sticks
+													// sticks
 		gc.insets = new Insets(0, 0, 0, 5);
 		add(new JLabel("Gender: "), gc);
 
@@ -293,6 +300,8 @@ public class FormPanel extends JPanel {
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(okBtn, gc);
 	}
+
+	/* ************ Form Interface Connection ********************************* */
 
 	public void setFormListener(FormListener listener) {
 		this.formListener = listener;

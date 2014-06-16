@@ -32,6 +32,13 @@ public class MainFrame extends JFrame {
 
 		formPanel.setFormListener(new FormListener() {
 			public void formEventOccurred(FormEvent e) {
+				/*
+				 * Fires when a formEventOccurred signal comes from FormPanel
+				 * (in turn fired by action listener detecting submit button
+				 * pressed) retrieves wanted data from event object, using 
+				 * methods defines in the FormEvent class. Adds desired 
+				 * info to the text display panel.
+				 */
 				String name = e.getName();
 				String occupation = e.getOccupation();
 				int ageCat = e.getAgeCategory();
