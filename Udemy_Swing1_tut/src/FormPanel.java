@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -23,6 +25,7 @@ public class FormPanel extends JPanel {
 	private JButton okBtn;
 	private FormListener formListener;
 	private JList ageList;
+	private JComboBox empCombo;
 
 	public FormPanel() {
 		Dimension dim = getPreferredSize();
@@ -34,7 +37,9 @@ public class FormPanel extends JPanel {
 		nameField = new JTextField(10);
 		occupationField = new JTextField(10);
 		ageList = new JList();
+		empCombo = new JComboBox();
 
+		// set up list box
 		DefaultListModel ageModel = new DefaultListModel();
 		ageModel.addElement(new AgeCategory(0, "Under 18"));
 		ageModel.addElement(new AgeCategory(1, "18 to 65"));
@@ -45,6 +50,14 @@ public class FormPanel extends JPanel {
 		ageList.setBorder(BorderFactory.createEtchedBorder());
 		ageList.setSelectedIndex(1); // sets default selection
 
+		// set up combo box
+		DefaultComboBoxModel empModel = new DefaultComboBoxModel();
+		empModel.addElement("employed");
+		empModel.addElement("self-employed");
+		empModel.addElement("unemployed");
+		empCombo.setModel(empModel);
+		
+		
 		okBtn = new JButton("OK");
 
 		okBtn.addActionListener(new ActionListener() {
@@ -67,6 +80,11 @@ public class FormPanel extends JPanel {
 		Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
+		layoutComponents();
+
+	}
+	
+	public void layoutComponents() {
 		setLayout(new GridBagLayout());
 
 		/* setting constraints at start can be essential */
@@ -129,7 +147,6 @@ public class FormPanel extends JPanel {
 		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(okBtn, gc);
-
 	}
 
 	public void setFormListener(FormListener listener) {
