@@ -17,6 +17,11 @@ public class FormEvent extends EventObject {
 
 	public FormEvent(Object source, String name, String occupation, int ageCat,
 			String empCat, String taxId, boolean usCitizen, String gender) {
+		/*
+		 * FormPanel FormEvent object is of this class and therefore has these
+		 * methods available to the data types passed up to MainFrame for
+		 * display
+		 */
 		super(source);
 
 		this.name = name;
@@ -27,8 +32,6 @@ public class FormEvent extends EventObject {
 		this.usCitizen = usCitizen;
 		this.gender = gender;
 	}
-	
-	
 
 	public String getGender() {
 		return gender;

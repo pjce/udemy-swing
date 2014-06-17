@@ -69,19 +69,27 @@ public class FormPanel extends JPanel {
 		genderGroup.add(femaleRadio);
 
 		// set up tax ID
-		taxLabel.setEnabled(false);
+		taxLabel.setEnabled(false); // initiates these as grayed out
 		taxField.setEnabled(false);
 
 		citizenCheck.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				/*
+				 * Checks if check box has become filled, if so sets boolean to
+				 * true which in turn enables the label and text field
+				 */
 				boolean isTicked = citizenCheck.isSelected();
-				taxLabel.setEnabled(isTicked);
+				taxLabel.setEnabled(isTicked); // false when isTicked is false
 				taxField.setEnabled(isTicked);
 			}
 		});
 
 		// set up list box
+		/*
+		 * JList box set up to contain objects of class AgeCategory in order to
+		 * contain ID and string for DB compatibility
+		 */
 		DefaultListModel ageModel = new DefaultListModel();
 		ageModel.addElement(new AgeCategory(0, "Under 18"));
 		ageModel.addElement(new AgeCategory(1, "18 to 65"));
@@ -131,10 +139,12 @@ public class FormPanel extends JPanel {
 			}
 		});
 
+		// set form panel borders, outer provides padding
 		Border innerBorder = BorderFactory.createTitledBorder("Add Person");
 		Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 
+		// lay out components
 		layoutComponents(); // layout operations separated for clarity
 
 	}
@@ -148,17 +158,17 @@ public class FormPanel extends JPanel {
 
 		// ///////////// First Row ///////////////////////////////////
 
-		gc.gridy = 0;
+		gc.gridy = 0; // inserts component at the top
 
 		gc.weightx = 1;
-		gc.weighty = 0.1;
+		gc.weighty = 0.1; // sets vertical spacing of components
 
 		gc.gridx = 0;
 
 		gc.fill = GridBagConstraints.NONE;
 		gc.anchor = GridBagConstraints.LINE_END; // defines where added sticks
-		gc.insets = new Insets(0, 0, 0, 5);
-		add(nameLabel, gc);
+		gc.insets = new Insets(0, 0, 0, 5); // fine tune align before add
+		add(nameLabel, gc); // add component to grid bag
 
 		gc.gridx = 1; // repeat these variables even if same easier to read
 		gc.gridy = 0;
@@ -168,7 +178,7 @@ public class FormPanel extends JPanel {
 
 		// ///////////// Next Row ///////////////////////////////////
 
-		gc.gridy++;
+		gc.gridy++; // the increment ensures each new component is packed 1 down
 
 		gc.weightx = 1;
 		gc.weighty = 0.1;
@@ -192,12 +202,9 @@ public class FormPanel extends JPanel {
 		gc.weighty = 0.2;
 
 		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.FIRST_LINE_END; // defines where added
-														// sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_END; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 5);
-		add(new JLabel("Age: "), gc);// create/instantiate JLabel on the fly,
-										// unlikely that it is going to be
-										// altered.
+		add(new JLabel("Age: "), gc);// create/instantiate JLabel on the fly
 
 		gc.gridx = 1;
 		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
@@ -212,8 +219,7 @@ public class FormPanel extends JPanel {
 		gc.weighty = 0.2;
 
 		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.FIRST_LINE_END; // defines where added
-														// sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_END; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 5);
 		add(new JLabel("Employment: "), gc);
 
@@ -230,13 +236,12 @@ public class FormPanel extends JPanel {
 		gc.weighty = 0.2;
 
 		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.FIRST_LINE_END; // defines where added
-														// sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_END; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 5);
 		add(new JLabel("US Citizen: "), gc);
 
 		gc.gridx = 1;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_START; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(citizenCheck, gc);
 
@@ -248,13 +253,12 @@ public class FormPanel extends JPanel {
 		gc.weighty = 0.2;
 
 		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.FIRST_LINE_END; // defines where added
-														// sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_END; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 5);
 		add(taxLabel, gc);
 
 		gc.gridx = 1;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_START; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(taxField, gc);
 
@@ -266,13 +270,12 @@ public class FormPanel extends JPanel {
 		gc.weighty = 0.05;
 
 		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.LINE_END; // defines where added
-													// sticks
+		gc.anchor = GridBagConstraints.LINE_END; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 5);
 		add(new JLabel("Gender: "), gc);
 
 		gc.gridx = 1;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_START; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(maleRadio, gc);
 
@@ -284,7 +287,7 @@ public class FormPanel extends JPanel {
 		gc.weighty = 0.2;
 
 		gc.gridx = 1;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_START; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(femaleRadio, gc);
 
@@ -296,7 +299,7 @@ public class FormPanel extends JPanel {
 		gc.weighty = 2.0;
 
 		gc.gridx = 1;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START; // defines where sticks
+		gc.anchor = GridBagConstraints.FIRST_LINE_START; // align in grid cell
 		gc.insets = new Insets(0, 0, 0, 0);
 		add(okBtn, gc);
 	}
@@ -308,20 +311,26 @@ public class FormPanel extends JPanel {
 	}
 }
 
+/* ************ JList class to make list items objects rather than strings **** */
+
 class AgeCategory {
+	/*
+	 * Class for adding types to the JList consisting of an ID and a string
+	 * allowing for choices to be referenced by ID (for DB purposes)
+	 */
 	private int id;
 	private String text;
 
 	public AgeCategory(int id, String text) {
-		this.id = id;
-		this.text = text;
+		this.id = id; // feeds initiated values to class variables for
+		this.text = text; // processing
 	}
 
 	public String toString() {
-		return text;
+		return text; // method returns a String rather than a memory ref
 	}
 
 	public int getId() {
-		return id;
+		return id; // method allows for ID lookup
 	}
 }

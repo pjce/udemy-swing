@@ -7,21 +7,26 @@ import javax.swing.JMenuItem;
 
 public class MainFrame extends JFrame {
 
+	/* ************ Declarations ********************************************* */
+
 	private TextPanel textPanel;
 	private Toolbar toolbar;
 	private FormPanel formPanel;
+
+	/* ************ Constructor *********************************************** */
 
 	public MainFrame() {
 		super("Hello World");
 
 		setLayout(new BorderLayout());
 
-		textPanel = new TextPanel();
-		toolbar = new Toolbar();
-		formPanel = new FormPanel();
+		textPanel = new TextPanel(); // main display box
+		toolbar = new Toolbar(); // rubbish toolbar
+		formPanel = new FormPanel(); // form panel
 
 		setJMenuBar(createMenuBar());
 
+		// receive and deal with signals/input from (rubbish) toolbar
 		toolbar.setStringListener(new StringListener() {
 
 			public void textEmitted(String text) {
@@ -29,15 +34,15 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-
+		// receive and deal with signals/input from form panel
 		formPanel.setFormListener(new FormListener() {
 			public void formEventOccurred(FormEvent e) {
 				/*
 				 * Fires when a formEventOccurred signal comes from FormPanel
 				 * (in turn fired by action listener detecting submit button
-				 * pressed) retrieves wanted data from event object, using 
-				 * methods defines in the FormEvent class. Adds desired 
-				 * info to the text display panel.
+				 * pressed) retrieves wanted data from event object, using
+				 * methods defines in the FormEvent class. Adds desired info to
+				 * the text display panel.
 				 */
 				String name = e.getName();
 				String occupation = e.getOccupation();
@@ -63,6 +68,7 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 	}
 
+	// set up the top dropdown menu
 	private JMenuBar createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 
@@ -71,7 +77,7 @@ public class MainFrame extends JFrame {
 		JMenuItem importDataItem = new JMenuItem("Import Data...");
 		JMenuItem exitItem = new JMenuItem("Exit");
 
-		fileMenu.add(exportDataItem);
+		fileMenu.add(exportDataItem); // file filemenu items
 		fileMenu.add(importDataItem);
 		fileMenu.addSeparator();
 		fileMenu.add(exitItem);

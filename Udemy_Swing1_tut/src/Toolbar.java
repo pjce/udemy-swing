@@ -13,6 +13,14 @@ public class Toolbar extends JPanel implements ActionListener {
 	private StringListener textListener;
 
 	public Toolbar() {
+		/*
+		 * This is from an early tutorial and is not necessarily the best
+		 * implementation of action listener. The (basic) logic used to decide
+		 * what to emit on action performed is hard coded within this element of
+		 * the view. However implementing ActionLister and then referencing
+		 * "this" within the addActionListeners is good practice for certain
+		 * circumstances, I believe.
+		 */
 
 		setBorder(BorderFactory.createEtchedBorder());
 
